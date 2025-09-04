@@ -225,7 +225,7 @@ ${formData.message}
                       <MapPin className="w-6 h-6" style={{ color: '#004225' }} />
                     </div>
                     <div>
-                      <h4 className="font-semibold mb-1" style={{ color: '#004225' }}>Visit Our Showroom</h4>
+                      <h4 className="font-semibold mb-1" style={{ color: '#004225' }}>Visit Us</h4>
                       <p className="text-gray-600">Thika Rd, Total Energies Ground Floor<br />Next to Queen of Apostles Catholic Church<br />Opp. Safari Park Hotel, Nairobi</p>
                     </div>
                   </div>
@@ -296,7 +296,7 @@ ${formData.message}
             <div className="text-center mb-8">
               <h2 className="font-serif text-3xl md:text-4xl font-bold mb-4" style={{ color: '#004225' }}>Find Us</h2>
               <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Visit our showroom at Thika Road, conveniently located next to Queen of Apostles Catholic Church
+                Visit our store at Thika Road, conveniently located next to Queen of Apostles Catholic Church
               </p>
             </div>
             

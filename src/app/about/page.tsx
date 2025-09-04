@@ -69,8 +69,8 @@ export default function AboutPage() {
                 </div>
                 <div className="text-center bg-white rounded-xl p-4 md:p-6 shadow-lg border" style={{ borderColor: '#dcf2e3' }}>
                   <Clock className="w-8 h-8 md:w-10 md:h-10 mx-auto mb-2" style={{ color: '#f1d956' }} />
-                  <div className="text-2xl md:text-3xl font-bold" style={{ color: '#f1d956' }}>5+</div>
-                  <div className="text-sm md:text-base text-gray-600 font-medium">Years Excellence</div>
+                  <div className="text-2xl md:text-3xl font-bold" style={{ color: '#f1d956' }}>24/7</div>
+                  <div className="text-sm md:text-base text-gray-600 font-medium">Support</div>
                 </div>
               </div>
             </motion.div>
@@ -170,7 +170,7 @@ export default function AboutPage() {
             >
               <h3 className="font-serif text-2xl md:text-3xl font-bold mb-6" style={{ color: '#004225' }}>Supporting Golf Excellence</h3>
               <p className="text-base md:text-lg text-gray-700 mb-6 leading-relaxed">
-                At ParWorld, we're not just equipment suppliers - we're active participants in Kenya's golf community. We believe in giving back and supporting the sport that brings us all together.
+                At Parworld, we're not just equipment suppliers - we're active participants in Kenya's golf community. We believe in giving back and supporting the sport that brings us all together.
               </p>
               <p className="text-base md:text-lg text-gray-700 mb-8 leading-relaxed">
                 Through our community initiatives, we support local tournaments, recognize outstanding golfers, and contribute to the growth of golf across Kenya. Our involvement goes beyond business - it's about nurturing the next generation of golf talent.
@@ -214,7 +214,7 @@ export default function AboutPage() {
             whileInView={{ opacity: 1, y: 0 }}
             className="text-center"
           >
-            <h3 className="font-serif text-2xl md:text-3xl font-bold mb-8" style={{ color: '#004225' }}>ParWorld in Action</h3>
+            <h3 className="font-serif text-2xl md:text-3xl font-bold mb-8" style={{ color: '#004225' }}>Parworld in Action</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
               {[
                 {
@@ -225,7 +225,7 @@ export default function AboutPage() {
                 {
                   src: "/Brands/KiambuLadiesOpenParworldGifting.jpeg",
                   title: "Kiambu Ladies Open",
-                  description: "ParWorld Gifting"
+                  description: "Parworld Gifting"
                 },
                 {
                   src: "/Brands/LimuruLadiesOpenGiveaways.jpeg",
