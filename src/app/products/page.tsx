@@ -6,7 +6,7 @@ import Link from 'next/link';
 import Navigation from '@/components/Navigation';
 import ScrollProgress from '@/components/ScrollProgress';
 import { GolfItem, fetchAllItems } from '@/lib/firebase';
-import { formatPrice } from '@/lib/utils';
+import { formatPrice, getCategoryDisplayName } from '@/lib/utils';
 
 export default function ProductsPage() {
   const [products, setProducts] = useState<GolfItem[]>([]);
