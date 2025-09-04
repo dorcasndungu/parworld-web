@@ -1,15 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  
+  /* Golf Color Palette - CSS Custom Properties */
+  --golf-green-50: #f0f9f4;
+  --golf-green-100: #dcf2e3;
+  --golf-green-200: #bce5ca;
+  --golf-green-300: #8dd1a7;
+  --golf-green-400: #57b67d;
+  --golf-green-500: #339b5c;
+  --golf-green-600: #267d47;
+  --golf-green-700: #1f633a;
+  --golf-green-800: #1b4f30;
+  --golf-green-900: #004225;
+  
+  --golf-gold-50: #fefdf8;
+  --golf-gold-100: #fdf9e7;
+  --golf-gold-200: #fbf2c4;
+  --golf-gold-300: #f7e896;
+  --golf-gold-400: #f1d956;
+  --golf-gold-500: #C9A646;
+  --golf-gold-600: #b8941f;
+  --golf-gold-700: #997a1a;
+  --golf-gold-800: #7d621b;
+  --golf-gold-900: #69511c;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-serif: 'Playfair Display', serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,5 +46,150 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
+  scroll-behavior: smooth;
 }
+
+/* Premium scrollbar - Hidden for clean look */
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+/* For Firefox */
+html {
+  scrollbar-width: none;
+}
+
+/* Custom scroll indicator */
+.scroll-indicator {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #004225 0%, #C9A646 100%);
+  transform-origin: left;
+  z-index: 9999;
+}
+
+/* Custom animations */
+@keyframes golfBallBounce {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(180deg); }
+}
+
+@keyframes golfBallRoll {
+  0% { transform: translateX(0) rotate(0deg); }
+  100% { transform: translateX(100vw) rotate(720deg); }
+}
+
+@keyframes golfBall3D {
+  0% {
+    transform: rotateX(0deg) rotateY(0deg) translateZ(0px);
+    box-shadow: 0 5px 15px rgba(0, 66, 37, 0.3);
+  }
+  25% {
+    transform: rotateX(90deg) rotateY(90deg) translateZ(10px);
+    box-shadow: 0 10px 25px rgba(0, 66, 37, 0.4);
+  }
+  50% {
+    transform: rotateX(180deg) rotateY(180deg) translateZ(0px);
+    box-shadow: 0 5px 15px rgba(0, 66, 37, 0.3);
+  }
+  75% {
+    transform: rotateX(270deg) rotateY(270deg) translateZ(-10px);
+    box-shadow: 0 15px 35px rgba(0, 66, 37, 0.5);
+  }
+  100% {
+    transform: rotateX(360deg) rotateY(360deg) translateZ(0px);
+    box-shadow: 0 5px 15px rgba(0, 66, 37, 0.3);
+  }
+}
+
+.golf-ball-bounce {
+  animation: golfBallBounce 2s ease-in-out infinite;
+}
+
+.golf-ball-3d {
+  width: 24px;
+  height: 24px;
+  background: radial-gradient(circle at 30% 30%, #ffffff, #f0f0f0, #e0e0e0);
+  border-radius: 50%;
+  position: relative;
+  animation: golfBall3D 4s ease-in-out infinite;
+  transform-style: preserve-3d;
+}
+
+.golf-ball-3d::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
+  background: radial-gradient(circle, transparent 1px, #ffffff 1px, transparent 2px);
+  background-size: 3px 3px;
+  border-radius: 50%;
+  opacity: 0.6;
+}
+
+.golf-ball-scroll {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1000;
+  pointer-events: none;
+}
+
+/* Brands carousel animation */
+@keyframes scroll-brands {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-scroll-brands {
+  animation: scroll-brands 30s linear infinite;
+  width: fit-content;
+}
+
+/* slower variant for fewer brand logos */
+.animate-scroll-brands-slower {
+  animation: scroll-brands 45s linear infinite;
+  width: fit-content;
+}
+
+/* Luxury button styles */
+.btn-premium {
+  background: linear-gradient(135deg, #C9A646 0%, #f1d956 100%);
+  color: #004225;
+  font-weight: 600;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 40px rgba(201, 166, 70, 0.2);
+  transition: all 0.3s ease;
+  transform: scale(1);
+}
+
+.btn-premium:hover {
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+  transform: scale(1.05);
+}
+
+.btn-secondary {
+  border: 2px solid currentColor;
+  color: inherit;
+  font-weight: 600;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+  background: transparent;
+}
+
+.btn-secondary:hover {
+  background-color: currentColor;
+  color: white;
+}
+
+/* Remove unused heavy hero styles */
