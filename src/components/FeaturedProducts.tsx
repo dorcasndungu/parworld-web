@@ -4,8 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { GolfItem, fetchFeaturedItems, fetchAllItems } from '@/lib/firebase';
-import { getOptimizedImageUrl } from '@/lib/utils';
-import { addToCart, formatPrice } from '@/lib/cart';
+import { formatPrice } from '@/lib/utils';
 
 export default function FeaturedProducts() {
   const [products, setProducts] = useState<GolfItem[]>([]);

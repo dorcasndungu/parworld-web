@@ -148,7 +148,7 @@ ${formData.message}
                         style={{ borderColor: '#dcf2e3' }}
                         onFocus={(e) => e.target.style.borderColor = '#f1d956'}
                         onBlur={(e) => e.target.style.borderColor = '#dcf2e3'}
-                        placeholder="+254700000000"
+                        placeholder="+254722897985"
                       />
                     </div>
                     
@@ -236,7 +236,7 @@ ${formData.message}
                     </div>
                     <div>
                       <h4 className="font-semibold mb-1" style={{ color: '#004225' }}>Call Us</h4>
-                      <p className="text-gray-600">(+254) 722 765 933</p>
+                      <p className="text-gray-600">(+254) 722 897 985</p>
                     </div>
                   </div>
 

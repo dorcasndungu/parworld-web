@@ -254,7 +254,7 @@ export default function ProductPage() {
                 className="space-y-4"
               >
                 <motion.button
-                  onClick={() => window.open(`https://wa.me/254700000000?text=Hi! I want to order: ${product.name} - ${formatPrice(product.price)}`, '_blank')}
+                  onClick={() => window.open(`https://wa.me/254722897985?text=Hi! I want to order: ${product.name} - ${formatPrice(product.price)}`, '_blank')}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   className="w-full bg-gradient-to-r from-golf-gold-500 to-golf-gold-600 text-golf-green-900 font-bold text-xl py-6 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 relative overflow-hidden group"
@@ -270,13 +270,7 @@ export default function ProductPage() {
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
                 </motion.button>
 
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="w-full border-2 border-golf-green-900 text-golf-green-900 font-semibold text-lg py-4 rounded-2xl hover:bg-golf-green-900 hover:text-white transition-all duration-300"
-                >
-                  Add to Wishlist
-                </motion.button>
+
               </motion.div>
             </motion.div>
           </div>

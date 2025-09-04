@@ -6,8 +6,7 @@ import Link from 'next/link';
 import Navigation from '@/components/Navigation';
 import ScrollProgress from '@/components/ScrollProgress';
 import { GolfItem, fetchAllItems } from '@/lib/firebase';
-import { getOptimizedImageUrl, getCategoryDisplayName } from '@/lib/utils';
-import { formatPrice } from '@/lib/cart';
+import { formatPrice } from '@/lib/utils';
 
 export default function ProductsPage() {
   const [products, setProducts] = useState<GolfItem[]>([]);
@@ -92,18 +91,18 @@ export default function ProductsPage() {
       <ScrollProgress />
       <Navigation />
       
-      {/* Hero Section */}
-      <section className="pt-24 pb-12 text-white relative overflow-hidden" style={{ backgroundColor: '#004225' }}>
+      {/* Hero Section - Mobile First */}
+      <section className="pt-20 sm:pt-24 pb-8 sm:pb-12 text-white relative overflow-hidden" style={{ backgroundColor: '#004225' }}>
         <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom right, rgba(0, 66, 37, 0.8), rgba(27, 79, 48, 0.4), rgba(31, 99, 58, 0.6))' }}></div>
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-16 left-24 w-32 h-32 rounded-full border" style={{ borderColor: 'rgba(241, 217, 86, 0.3)' }}></div>
-          <div className="absolute bottom-12 right-24 w-24 h-24 rounded-full border" style={{ borderColor: 'rgba(241, 217, 86, 0.3)' }}></div>
+          <div className="absolute top-8 sm:top-16 left-8 sm:left-24 w-16 sm:w-32 h-16 sm:h-32 rounded-full border" style={{ borderColor: 'rgba(241, 217, 86, 0.3)' }}></div>
+          <div className="absolute bottom-6 sm:bottom-12 right-8 sm:right-24 w-12 sm:w-24 h-12 sm:h-24 rounded-full border" style={{ borderColor: 'rgba(241, 217, 86, 0.3)' }}></div>
         </div>
-        <div className="max-w-7xl mx-auto px-4 md:px-8 text-center relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 text-center relative z-10">
           <motion.h1 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            className="font-serif text-4xl md:text-6xl font-bold mb-4 md:mb-6"
+            className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold mb-3 sm:mb-4 md:mb-6"
           >
             Premium Golf <span className="drop-shadow-lg" style={{ color: '#f1d956' }}>Equipment</span>
           </motion.h1>
@@ -111,7 +110,7 @@ export default function ProductsPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-lg md:text-2xl max-w-3xl mx-auto font-medium drop-shadow-lg"
+            className="text-sm sm:text-base md:text-lg lg:text-2xl max-w-3xl mx-auto font-medium drop-shadow-lg px-4"
             style={{ color: '#f0f9f4' }}
           >
             Discover our complete collection of professional‑grade golf equipment from the world's leading brands
@@ -119,43 +118,43 @@ export default function ProductsPage() {
         </div>
       </section>
 
-      {/* Titleist-Style Navigation & Search */}
-      <section className="py-12 bg-gradient-to-b from-white to-gray-50">
-        <div className="max-w-7xl mx-auto px-4 md:px-8">
-          {/* Premium Search Bar */}
-          <div className="max-w-2xl mx-auto mb-12">
+      {/* Search & Filter Section - Mobile First */}
+      <section className="py-8 sm:py-10 md:py-12 bg-gradient-to-b from-white to-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+          {/* Mobile-First Search Bar */}
+          <div className="max-w-2xl mx-auto mb-8 sm:mb-10 md:mb-12">
             <div className="relative">
               <input
                 type="text"
                 placeholder="Search our premium collection..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full px-8 py-5 text-lg border-2 border-gray-200 rounded-full focus:ring-4 focus:ring-golf-green-500/20 focus:border-golf-green-500 transition-all duration-300 bg-white shadow-lg"
+                className="w-full px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 text-sm sm:text-base md:text-lg border-2 border-gray-200 rounded-full focus:ring-4 focus:ring-golf-green-500/20 focus:border-golf-green-500 transition-all duration-300 bg-white shadow-lg"
               />
-              <div className="absolute right-6 top-1/2 transform -translate-y-1/2">
-                <svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="absolute right-4 sm:right-6 top-1/2 transform -translate-y-1/2">
+                <svg className="w-5 h-5 sm:w-6 sm:h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
               </div>
             </div>
             </div>
 
-          {/* Dynamic Category Pills with Better UX */}
-          <div className="flex flex-wrap justify-center gap-3 mb-8">
+          {/* Mobile-First Category Pills */}
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-6 sm:mb-8">
             <motion.button
               onClick={() => setSelectedCategory('all')}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className={`px-6 py-3 rounded-full font-semibold text-sm transition-all duration-300 border-2 ${
+              className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold text-xs sm:text-sm transition-all duration-300 border-2 relative ${
                 selectedCategory === 'all'
-                  ? 'bg-golf-green-900 text-white border-golf-green-900 shadow-lg'
-                  : 'bg-white text-golf-green-900 border-golf-green-900 hover:bg-golf-green-900 hover:text-white shadow-md hover:shadow-lg'
+                  ? 'bg-golf-gold-500 text-golf-green-900 border-golf-gold-500 shadow-lg ring-2 ring-golf-gold-200'
+                  : 'bg-white text-golf-green-900 border-golf-green-900 hover:bg-golf-green-50 hover:border-golf-green-700 shadow-md hover:shadow-lg'
               }`}
             >
               All Products
-              <span className={`ml-2 px-2 py-0.5 rounded-full text-xs ${
+              <span className={`ml-2 px-2 py-0.5 rounded-full text-xs font-medium ${
                 selectedCategory === 'all'
-                  ? 'bg-white/20 text-white'
+                  ? 'bg-golf-green-900/20 text-golf-green-900'
                   : 'bg-golf-green-900/10 text-golf-green-900'
               }`}>
                 {products.length}
@@ -173,21 +172,21 @@ export default function ProductsPage() {
                 const productCount = getProductsByCategory(category).length;
                 return (
                   <motion.button
-                    key={category}
-                    onClick={() => setSelectedCategory(category)}
+                  key={category}
+                  onClick={() => setSelectedCategory(category)}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className={`px-6 py-3 rounded-full font-semibold text-sm transition-all duration-300 border-2 relative ${
-                      selectedCategory === category
-                        ? 'bg-golf-green-900 text-white border-golf-green-900 shadow-lg'
-                        : 'bg-white text-golf-green-900 border-golf-green-900 hover:bg-golf-green-900 hover:text-white shadow-md hover:shadow-lg'
-                    }`}
-                  >
-                    {getCategoryDisplayName(category)}
+                    className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold text-xs sm:text-sm transition-all duration-300 border-2 relative ${
+                    selectedCategory === category
+                        ? 'bg-golf-gold-500 text-golf-green-900 border-golf-gold-500 shadow-lg ring-2 ring-golf-gold-200'
+                        : 'bg-white text-golf-green-900 border-golf-green-900 hover:bg-golf-green-50 hover:border-golf-green-700 shadow-md hover:shadow-lg'
+                  }`}
+                >
+                  {getCategoryDisplayName(category)}
                     {productCount > 0 && (
-                      <span className={`ml-2 px-2 py-0.5 rounded-full text-xs ${
+                      <span className={`ml-2 px-2 py-0.5 rounded-full text-xs font-medium ${
                         selectedCategory === category
-                          ? 'bg-white/20 text-white'
+                          ? 'bg-golf-green-900/20 text-golf-green-900'
                           : 'bg-golf-green-900/10 text-golf-green-900'
                       }`}>
                         {productCount}
@@ -232,8 +231,8 @@ export default function ProductsPage() {
                       </p>
                     </div>
 
-                    {/* Clean Products Grid - Matching Featured Cards Style */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+                    {/* Mobile-First Products Grid */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-12">
                       {categoryProducts.map((product, index) => (
                   <Link href={`/product/${product.id}`} key={product.id}>
                     <motion.div
@@ -370,8 +369,8 @@ export default function ProductsPage() {
                       </p>
               </div>
 
-                    {/* Products Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    {/* Mobile-First Products Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
                       {categoryProducts.map((product, index) => (
                   <Link href={`/product/${product.id}`} key={product.id}>
                     <motion.div
@@ -395,14 +394,14 @@ export default function ProductsPage() {
                         <div className="relative aspect-square overflow-hidden bg-gray-50">
                           {product.imageUrls && product.imageUrls.length > 0 && product.imageUrls[0] ? (
                             <motion.img
-                              src={product.imageUrls[0]}
-                              alt={product.name}
+                            src={product.imageUrls[0]}
+                            alt={product.name}
                               className="w-full h-full object-contain p-6 group-hover:scale-105 transition-transform duration-500 ease-out"
-                              onError={(e) => {
-                                console.log('Image failed to load:', product.imageUrls[0]);
-                                e.currentTarget.style.display = 'none';
-                              }}
-                            />
+                            onError={(e) => {
+                              console.log('Image failed to load:', product.imageUrls[0]);
+                              e.currentTarget.style.display = 'none';
+                            }}
+                          />
                           ) : (
                             <div className="w-full h-full flex items-center justify-center bg-gray-50">
                               <div className="text-center text-gray-300">

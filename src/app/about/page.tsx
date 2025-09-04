@@ -32,7 +32,7 @@ export default function AboutPage() {
               About <span className="drop-shadow-lg" style={{ color: '#f1d956' }}>PARWORLD GOLF</span>
             </h1>
             <p className="text-lg md:text-xl lg:text-2xl max-w-3xl mx-auto leading-relaxed font-medium drop-shadow-lg" style={{ color: '#f0f9f4' }}>
-              Kenya's premier destination for luxury golf equipment and exclusive community experiences
+              Kenya&apos;s premier destination for luxury golf equipment and exclusive community experiences
             </p>
           </motion.div>
         </div>

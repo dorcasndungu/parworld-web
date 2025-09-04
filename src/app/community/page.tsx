@@ -302,7 +302,7 @@ export default function CommunityPage() {
                   value={formData.phone}
                   onChange={handleChange}
                   className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg md:rounded-xl focus:ring-2 focus:ring-golf-green-500 focus:border-transparent transition-all duration-300 text-sm md:text-base"
-                  placeholder="+254700000000"
+                  placeholder="+254722897985"
                 />
               </div>
 
