@@ -14,23 +14,19 @@ export default function ProductsPage() {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
-
-  // Your exact Firebase categories
-  const golfCategories = [
-    'Golf Equipment',
-    'Golf Bags',
-    'Headgear',
-    'Clothing',
-    'Accessories',
-    'Golf Balls',
-    'Footware'
-  ];
+  const [availableCategories, setAvailableCategories] = useState<string[]>([]);
 
   useEffect(() => {
     const loadProducts = async () => {
       try {
         const items = await fetchAllItems();
         setProducts(items);
+        
+        // Extract unique categories from products
+        const categories = [...new Set(items.map(item => item.category).filter(Boolean))];
+        setAvailableCategories(categories);
+        
+        console.log('Available categories from Firebase:', categories);
       } catch (error) {
         console.error('Error loading products:', error);
       } finally {
@@ -144,35 +140,63 @@ export default function ProductsPage() {
             </div>
             </div>
 
-          {/* Titleist-Style Category Pills */}
-          <div className="flex flex-wrap justify-center gap-4 mb-8">
+          {/* Dynamic Category Pills with Better UX */}
+          <div className="flex flex-wrap justify-center gap-3 mb-8">
             <motion.button
               onClick={() => setSelectedCategory('all')}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className={`px-8 py-4 rounded-full font-bold text-sm uppercase tracking-wider transition-all duration-300 border-2 ${
+              className={`px-6 py-3 rounded-full font-semibold text-sm transition-all duration-300 border-2 ${
                 selectedCategory === 'all'
-                  ? 'bg-golf-green-900 text-white border-golf-green-900 shadow-xl'
-                  : 'bg-white text-golf-green-900 border-golf-green-900 hover:bg-golf-green-900 hover:text-white shadow-lg'
+                  ? 'bg-golf-green-900 text-white border-golf-green-900 shadow-lg'
+                  : 'bg-white text-golf-green-900 border-golf-green-900 hover:bg-golf-green-900 hover:text-white shadow-md hover:shadow-lg'
               }`}
             >
-              All Collections
+              All Products
+              <span className={`ml-2 px-2 py-0.5 rounded-full text-xs ${
+                selectedCategory === 'all'
+                  ? 'bg-white/20 text-white'
+                  : 'bg-golf-green-900/10 text-golf-green-900'
+              }`}>
+                {products.length}
+              </span>
             </motion.button>
-            {golfCategories.map((category) => (
-              <motion.button
-                  key={category}
-                  onClick={() => setSelectedCategory(category)}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className={`px-8 py-4 rounded-full font-bold text-sm uppercase tracking-wider transition-all duration-300 border-2 ${
-                    selectedCategory === category
-                    ? 'bg-golf-green-900 text-white border-golf-green-900 shadow-xl'
-                    : 'bg-white text-golf-green-900 border-golf-green-900 hover:bg-golf-green-900 hover:text-white shadow-lg'
-                  }`}
-                >
-                {category}
-              </motion.button>
-              ))}
+            {loading ? (
+              // Loading skeleton for categories
+              Array.from({ length: 4 }).map((_, index) => (
+                <div key={index} className="px-6 py-3 rounded-full bg-gray-200 animate-pulse">
+                  <div className="w-20 h-4 bg-gray-300 rounded"></div>
+                </div>
+              ))
+            ) : (
+              availableCategories.map((category) => {
+                const productCount = getProductsByCategory(category).length;
+                return (
+                  <motion.button
+                    key={category}
+                    onClick={() => setSelectedCategory(category)}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className={`px-6 py-3 rounded-full font-semibold text-sm transition-all duration-300 border-2 relative ${
+                      selectedCategory === category
+                        ? 'bg-golf-green-900 text-white border-golf-green-900 shadow-lg'
+                        : 'bg-white text-golf-green-900 border-golf-green-900 hover:bg-golf-green-900 hover:text-white shadow-md hover:shadow-lg'
+                    }`}
+                  >
+                    {getCategoryDisplayName(category)}
+                    {productCount > 0 && (
+                      <span className={`ml-2 px-2 py-0.5 rounded-full text-xs ${
+                        selectedCategory === category
+                          ? 'bg-white/20 text-white'
+                          : 'bg-golf-green-900/10 text-golf-green-900'
+                      }`}>
+                        {productCount}
+                      </span>
+                    )}
+                  </motion.button>
+                );
+              })
+            )}
           </div>
         </div>
       </section>
@@ -183,7 +207,7 @@ export default function ProductsPage() {
           {selectedCategory === 'all' ? (
             // Show all categories separated
             <div className="space-y-16">
-              {golfCategories.map((category) => {
+              {availableCategories.map((category) => {
                 const categoryProducts = getProductsByCategory(category);
                 if (categoryProducts.length === 0) return null;
 
@@ -199,12 +223,12 @@ export default function ProductsPage() {
                     <div className="text-center mb-12">
                       <div className="inline-block">
                         <h2 className="font-serif text-4xl md:text-5xl font-bold text-golf-green-900 mb-4 relative">
-                          {category}
+                          {getCategoryDisplayName(category)}
                           <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-golf-gold-500 rounded-full"></div>
                         </h2>
                       </div>
                       <p className="text-gray-600 text-xl font-light mt-6 max-w-2xl mx-auto">
-                        Precision-engineered {category.toLowerCase()} designed for peak performance and uncompromising quality
+                        Precision-engineered {getCategoryDisplayName(category).toLowerCase()} designed for peak performance and uncompromising quality
                       </p>
                     </div>
 
@@ -295,7 +319,7 @@ export default function ProductsPage() {
               })}
 
               {/* Show message if no products found */}
-              {golfCategories.every(cat => getProductsByCategory(cat).length === 0) && (
+              {availableCategories.every(cat => getProductsByCategory(cat).length === 0) && (
             <div className="text-center py-20">
                   <div className="w-24 h-24 bg-golf-green-900 rounded-full flex items-center justify-center mx-auto mb-6">
                     <svg className="w-12 h-12 text-golf-gold-400" fill="currentColor" viewBox="0 0 24 24">
