@@ -5,6 +5,7 @@ import HeroSection from '@/components/HeroSection';
 import FeaturedProducts from '@/components/FeaturedProducts';
 import BrandsCarousel from '@/components/BrandsCarousel';
 import ScrollProgress from '@/components/ScrollProgress';
+import BackToTop from '@/components/BackToTop';
 import { Users, Award, Headphones, ArrowRight, MessageCircle } from 'lucide-react';
 
 export default function Home() {
@@ -123,8 +124,8 @@ export default function Home() {
   </div>
 </section>
 
-
-
+      {/* Back to Top Button */}
+      <BackToTop />
     </main>
   );
 }

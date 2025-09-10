@@ -104,7 +104,7 @@ ${formData.message}
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
+                      <label className="block text-sm font-medium style={{ color: '#374151' }} mb-2">Full Name *</label>
                       <input
                         type="text"
                         name="name"
@@ -120,7 +120,7 @@ ${formData.message}
                     </div>
                     
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Email *</label>
+                      <label className="block text-sm font-medium style={{ color: '#374151' }} mb-2">Email *</label>
                       <input
                         type="email"
                         name="email"
@@ -138,7 +138,7 @@ ${formData.message}
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Phone</label>
+                      <label className="block text-sm font-medium style={{ color: '#374151' }} mb-2">Phone</label>
                       <input
                         type="tel"
                         name="phone"
@@ -153,7 +153,7 @@ ${formData.message}
                     </div>
                     
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Subject *</label>
+                      <label className="block text-sm font-medium style={{ color: '#374151' }} mb-2">Subject *</label>
                       <select
                         name="subject"
                         value={formData.subject}
@@ -175,7 +175,7 @@ ${formData.message}
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Message *</label>
+                    <label className="block text-sm font-medium style={{ color: '#374151' }} mb-2">Message *</label>
                     <textarea
                       name="message"
                       value={formData.message}
@@ -226,7 +226,7 @@ ${formData.message}
                     </div>
                     <div>
                       <h4 className="font-semibold mb-1" style={{ color: '#004225' }}>Visit Us</h4>
-                      <p className="text-gray-600">Thika Rd, Total Energies Ground Floor<br />Next to Queen of Apostles Catholic Church<br />Opp. Safari Park Hotel, Nairobi</p>
+                      <p className="style={{ color: '#4b5563' }}">Thika Rd, Total Energies Ground Floor<br />Next to Queen of Apostles Catholic Church<br />Opp. Safari Park Hotel, Nairobi</p>
                     </div>
                   </div>
 
@@ -236,7 +236,7 @@ ${formData.message}
                     </div>
                     <div>
                       <h4 className="font-semibold mb-1" style={{ color: '#004225' }}>Call Us</h4>
-                      <p className="text-gray-600">(+254) 722 897 985</p>
+                      <p style={{ color: '#4b5563' }}>(+254) 722 897 985</p>
                     </div>
                   </div>
 
@@ -246,7 +246,7 @@ ${formData.message}
                     </div>
                     <div>
                       <h4 className="font-semibold mb-1" style={{ color: '#004225' }}>Email Us</h4>
-                      <p className="text-gray-600">info@parworldgolfent.com</p>
+                      <p className="style={{ color: '#4b5563' }}">info@parworldgolfent.com</p>
                     </div>
                   </div>
 
@@ -256,7 +256,7 @@ ${formData.message}
                     </div>
                     <div>
                       <h4 className="font-semibold mb-1" style={{ color: '#004225' }}>WhatsApp</h4>
-                      <p className="text-gray-600">(+254) 722 897 985</p>
+                      <p className="style={{ color: '#4b5563' }}">(+254) 722 897 985</p>
                     </div>
                   </div>
                 </div>
@@ -270,16 +270,16 @@ ${formData.message}
                   <div className="flex items-center space-x-4">
                     <Clock className="w-5 h-5" style={{ color: '#C9A646' }} />
                     <div className="flex justify-between w-full">
-                      <span className="text-gray-600">Monday - Saturday</span>
+                      <span className="style={{ color: '#4b5563' }}">Monday - Saturday</span>
                       <span className="font-semibold" style={{ color: '#004225' }}>8:00 AM - 8:00 PM</span>
                     </div>
                   </div>
                   <div className="flex items-center space-x-4">
                     <Clock className="w-5 h-5" style={{ color: '#C9A646' }} />
                     <div className="flex justify-between w-full">
-                      <span className="text-gray-600">Sunday</span>
+                      <span className="style={{ color: '#4b5563' }}">Sunday</span>
                       <span className="font-semibold" style={{ color: '#004225' }}>Closed</span>
-                    </div>
+                  </div>
                   </div>
                 </div>
               </div>
@@ -295,7 +295,7 @@ ${formData.message}
           >
             <div className="text-center mb-8">
               <h2 className="font-serif text-3xl md:text-4xl font-bold mb-4" style={{ color: '#004225' }}>Find Us</h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              <p className="text-lg style={{ color: '#4b5563' }} max-w-2xl mx-auto">
                 Visit our store at Thika Road, conveniently located next to Queen of Apostles Catholic Church
               </p>
             </div>
@@ -315,7 +315,7 @@ ${formData.message}
               </div>
               
               <div className="mt-6 text-center">
-                <p className="text-gray-600 mb-4">
+                <p className="style={{ color: '#4b5563' }} mb-4">
                   <strong>Address:</strong> Thika Rd, Total Energies Ground Floor<br />
                   Next to Queen of Apostles Catholic Church<br />
                   Opposite Safari Park Hotel, Nairobi

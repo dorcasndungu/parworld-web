@@ -184,7 +184,7 @@ export default function CommunityPage() {
             className="text-center mb-12 md:mb-16"
           >
             <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6" style={{ color: '#004225' }}>Exclusive Member Benefits</h2>
-            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl style={{ color: '#4b5563' }} max-w-3xl mx-auto leading-relaxed">
               Join our community and unlock premium perks designed for serious golfers
             </p>
           </motion.div>
@@ -239,7 +239,7 @@ export default function CommunityPage() {
                     <IconComponent className="w-10 h-10 md:w-12 md:h-12 group-hover:scale-110 transition-all duration-300" style={{ color: '#C9A646' }} />
                   </div>
                   <h3 className="font-serif text-lg md:text-xl font-bold mb-3 text-center" style={{ color: '#004225' }}>{benefit.title}</h3>
-                  <p className="text-sm md:text-base text-gray-600 leading-relaxed text-center">{benefit.description}</p>
+                  <p className="text-sm md:text-base style={{ color: '#4b5563' }} leading-relaxed text-center">{benefit.description}</p>
               </motion.div>
               );
             })}
@@ -260,7 +260,7 @@ export default function CommunityPage() {
               <h2 className="font-serif text-2xl md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4" style={{ color: '#004225' }}>
                 Ready to Join?
               </h2>
-              <p className="text-base md:text-lg text-gray-600 leading-relaxed">
+              <p className="text-base md:text-lg style={{ color: '#4b5563' }} leading-relaxed">
                 Fill out the form below and become part of Kenya's premier golf community
               </p>
             </div>
@@ -268,7 +268,7 @@ export default function CommunityPage() {
             <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
+                  <label className="block text-sm font-medium style={{ color: '#374151' }} mb-2">Full Name *</label>
                   <input
                     type="text"
                     name="name"
@@ -281,7 +281,7 @@ export default function CommunityPage() {
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+                  <label className="block text-sm font-medium style={{ color: '#374151' }} mb-2">Email Address *</label>
                   <input
                     type="email"
                     name="email"
@@ -295,7 +295,7 @@ export default function CommunityPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number (Optional)</label>
+                <label className="block text-sm font-medium style={{ color: '#374151' }} mb-2">Phone Number (Optional)</label>
                 <input
                   type="tel"
                   name="phone"
@@ -307,7 +307,7 @@ export default function CommunityPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-3 md:mb-4">What interests you most? (Select all that apply)</label>
+                <label className="block text-sm font-medium style={{ color: '#374151' }} mb-3 md:mb-4">What interests you most? (Select all that apply)</label>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-3">
                   {interestOptions.map((interest) => (
                     <motion.button
@@ -374,7 +374,7 @@ export default function CommunityPage() {
                 </svg>
               </div>
               <h3 className="font-serif text-2xl font-bold text-golf-green-900 mb-4">Welcome to The Golf Circle!</h3>
-              <p className="text-gray-600 mb-6">
+              <p className="style={{ color: '#4b5563' }} mb-6">
                 You've successfully joined our exclusive community. Check your email for a welcome message with your member benefits.
               </p>
               <button

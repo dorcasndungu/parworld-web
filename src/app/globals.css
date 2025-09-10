@@ -48,6 +48,15 @@ body {
   color: var(--foreground);
   font-family: 'Inter', system-ui, sans-serif;
   scroll-behavior: smooth;
+  
+  /* Device-specific text rendering optimizations */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-synthesis: none;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 /* Premium scrollbar - Hidden for clean look */
@@ -190,6 +199,57 @@ html {
 .btn-secondary:hover {
   background-color: currentColor;
   color: white;
+}
+
+/* Device-specific text rendering fixes */
+/* iOS Safari specific fixes */
+@supports (-webkit-touch-callout: none) {
+  body {
+    -webkit-font-smoothing: subpixel-antialiased;
+  }
+  
+  /* Force darker text on iOS */
+  .text-dark-fallback {
+    color: #000000 !important;
+    -webkit-text-fill-color: #000000;
+  }
+}
+
+/* Android Chrome specific fixes */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  .text-dark-fallback {
+    color: #1a1a1a !important;
+    text-shadow: 0 0 0 #1a1a1a;
+  }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Samsung Internet specific */
+@supports (-webkit-appearance: none) {
+  .text-dark-fallback {
+    color: #000000 !important;
+    -webkit-text-stroke: 0.5px #000000;
+  }
+}
+
+/* Fallback for devices with poor color rendering */
+.text-contrast-fallback {
+  color: #000000 !important;
+  font-weight: 600 !important;
+  text-shadow: 0 0 0 #000000;
+}
+
+/* Ensure minimum contrast on all devices */
+.min-contrast-text {
+  color: #1a1a1a !important;
+  font-weight: 500 !important;
 }
 
 /* Remove unused heavy hero styles */

@@ -48,10 +48,10 @@ export default function AboutPage() {
               transition={{ duration: 0.8 }}
             >
               <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold mb-6" style={{ color: '#004225' }}>Our Story</h2>
-              <p className="text-base md:text-lg text-gray-700 mb-6 leading-relaxed">
+              <p className="text-base md:text-lg style={{ color: '#374151' }} mb-6 leading-relaxed">
                 ParWorld was born from a simple yet powerful vision: making premium golf equipment accessible to every golfer in Kenya. Founded by passionate golf enthusiasts who understood the challenges of finding quality gear, we set out to create a home for golfers - a place where excellence meets accessibility.
               </p>
-              <p className="text-base md:text-lg text-gray-700 mb-8 leading-relaxed">
+              <p className="text-base md:text-lg style={{ color: '#374151' }} mb-8 leading-relaxed">
                 We believe golf is more than a sport; it's a community. That's why we've built ParWorld as a warm, welcoming space where every golfer - from beginners taking their first swing to seasoned professionals - can find not just equipment, but guidance, support, and a sense of belonging.
               </p>
               
@@ -60,17 +60,17 @@ export default function AboutPage() {
                 <div className="text-center bg-white rounded-xl p-4 md:p-6 shadow-lg border" style={{ borderColor: '#dcf2e3' }}>
                   <Users className="w-8 h-8 md:w-10 md:h-10 mx-auto mb-2" style={{ color: '#f1d956' }} />
                   <div className="text-2xl md:text-3xl font-bold" style={{ color: '#f1d956' }}>500+</div>
-                  <div className="text-sm md:text-base text-gray-600 font-medium">Happy Golfers</div>
+                  <div className="text-sm md:text-base style={{ color: '#4b5563' }} font-medium">Happy Golfers</div>
                 </div>
                 <div className="text-center bg-white rounded-xl p-4 md:p-6 shadow-lg border" style={{ borderColor: '#dcf2e3' }}>
                   <Award className="w-8 h-8 md:w-10 md:h-10 mx-auto mb-2" style={{ color: '#f1d956' }} />
                   <div className="text-2xl md:text-3xl font-bold" style={{ color: '#f1d956' }}>20+</div>
-                  <div className="text-sm md:text-base text-gray-600 font-medium">Premium Brands</div>
+                  <div className="text-sm md:text-base style={{ color: '#4b5563' }} font-medium">Premium Brands</div>
                 </div>
                 <div className="text-center bg-white rounded-xl p-4 md:p-6 shadow-lg border" style={{ borderColor: '#dcf2e3' }}>
                   <Clock className="w-8 h-8 md:w-10 md:h-10 mx-auto mb-2" style={{ color: '#f1d956' }} />
                   <div className="text-2xl md:text-3xl font-bold" style={{ color: '#f1d956' }}>24/7</div>
-                  <div className="text-sm md:text-base text-gray-600 font-medium">Support</div>
+                  <div className="text-sm md:text-base style={{ color: '#4b5563' }} font-medium">Support</div>
                 </div>
               </div>
             </motion.div>
@@ -103,7 +103,7 @@ export default function AboutPage() {
             className="text-center mb-12 md:mb-16"
           >
             <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6" style={{ color: '#004225' }}>Our Values</h2>
-            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl style={{ color: '#4b5563' }} max-w-3xl mx-auto leading-relaxed">
               The principles that guide everything we do
             </p>
           </motion.div>
@@ -140,7 +140,7 @@ export default function AboutPage() {
                     <IconComponent className="w-10 h-10 md:w-12 md:h-12 group-hover:scale-110 transition-all duration-300" style={{ color: '#C9A646' }} />
                   </div>
                   <h3 className="font-serif text-xl md:text-2xl font-bold mb-4 text-center" style={{ color: '#004225' }}>{value.title}</h3>
-                  <p className="text-sm md:text-base text-gray-600 leading-relaxed text-center">{value.description}</p>
+                  <p className="text-sm md:text-base style={{ color: '#4b5563' }} leading-relaxed text-center">{value.description}</p>
               </motion.div>
               );
             })}
@@ -157,7 +157,7 @@ export default function AboutPage() {
             className="text-center mb-12 md:mb-16"
           >
             <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6" style={{ color: '#004225' }}>Active in the Golf Community</h2>
-            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl style={{ color: '#4b5563' }} max-w-3xl mx-auto leading-relaxed">
               Supporting Kenya's golf community through active participation and meaningful contributions
             </p>
           </motion.div>
@@ -169,10 +169,10 @@ export default function AboutPage() {
               transition={{ duration: 0.8 }}
             >
               <h3 className="font-serif text-2xl md:text-3xl font-bold mb-6" style={{ color: '#004225' }}>Supporting Golf Excellence</h3>
-              <p className="text-base md:text-lg text-gray-700 mb-6 leading-relaxed">
+              <p className="text-base md:text-lg style={{ color: '#374151' }} mb-6 leading-relaxed">
                 At Parworld, we're not just equipment suppliers - we're active participants in Kenya's golf community. We believe in giving back and supporting the sport that brings us all together.
               </p>
-              <p className="text-base md:text-lg text-gray-700 mb-8 leading-relaxed">
+              <p className="text-base md:text-lg style={{ color: '#374151' }} mb-8 leading-relaxed">
                 Through our community initiatives, we support local tournaments, recognize outstanding golfers, and contribute to the growth of golf across Kenya. Our involvement goes beyond business - it's about nurturing the next generation of golf talent.
               </p>
               
@@ -181,12 +181,12 @@ export default function AboutPage() {
                 <div className="text-center bg-white rounded-xl p-4 md:p-6 shadow-lg border" style={{ borderColor: '#dcf2e3' }}>
                   <Award className="w-8 h-8 md:w-10 md:h-10 mx-auto mb-2" style={{ color: '#f1d956' }} />
                   <div className="text-2xl md:text-3xl font-bold" style={{ color: '#f1d956' }}>15+</div>
-                  <div className="text-sm md:text-base text-gray-600 font-medium">Tournaments Supported</div>
+                  <div className="text-sm md:text-base style={{ color: '#4b5563' }} font-medium">Tournaments Supported</div>
                 </div>
                 <div className="text-center bg-white rounded-xl p-4 md:p-6 shadow-lg border" style={{ borderColor: '#dcf2e3' }}>
                   <Users className="w-8 h-8 md:w-10 md:h-10 mx-auto mb-2" style={{ color: '#f1d956' }} />
                   <div className="text-2xl md:text-3xl font-bold" style={{ color: '#f1d956' }}>50+</div>
-                  <div className="text-sm md:text-base text-gray-600 font-medium">Golfers Recognized</div>
+                  <div className="text-sm md:text-base style={{ color: '#4b5563' }} font-medium">Golfers Recognized</div>
                 </div>
               </div>
             </motion.div>
@@ -274,8 +274,8 @@ export default function AboutPage() {
                   
                   {/* Mobile description below image */}
                   <div className="absolute -bottom-16 left-0 right-0 p-2 bg-white rounded-b-lg shadow-lg md:hidden">
-                    <h4 className="font-semibold text-sm text-gray-900 mb-1">{item.title}</h4>
-                    <p className="text-xs text-gray-600">{item.description}</p>
+                    <h4 className="font-semibold text-sm style={{ color: '#111827' }} mb-1">{item.title}</h4>
+                    <p className="text-xs style={{ color: '#4b5563' }}">{item.description}</p>
                 </div>
               </motion.div>
             ))}

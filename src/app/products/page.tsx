@@ -1,10 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import Navigation from '@/components/Navigation';
 import ScrollProgress from '@/components/ScrollProgress';
+import BackToTop from '@/components/BackToTop';
 import { GolfItem, fetchAllItems } from '@/lib/firebase';
 import { formatPrice, getCategoryDisplayName } from '@/lib/utils';
 
@@ -14,6 +15,8 @@ export default function ProductsPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [availableCategories, setAvailableCategories] = useState<string[]>([]);
+  const [showStickyBar, setShowStickyBar] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -35,6 +38,26 @@ export default function ProductsPage() {
 
     loadProducts();
   }, []);
+
+  // Smart sticky bar behavior - only show when scrolling down past hero section
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      const heroHeight = 400; // Approximate hero section height
+      
+      // Show sticky bar when scrolled past hero and scrolling down
+      if (currentScrollY > heroHeight && currentScrollY > lastScrollY && currentScrollY > 100) {
+        setShowStickyBar(true);
+      } else if (currentScrollY < heroHeight || currentScrollY < lastScrollY) {
+        setShowStickyBar(false);
+      }
+      
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
 
   // Helper function to get products by category
   const getProductsByCategory = (category: string) => {
@@ -147,16 +170,22 @@ export default function ProductsPage() {
               whileTap={{ scale: 0.95 }}
               className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold text-xs sm:text-sm transition-all duration-300 border-2 relative ${
                 selectedCategory === 'all'
-                  ? 'bg-golf-gold-500 text-golf-green-900 border-golf-gold-500 shadow-lg ring-2 ring-golf-gold-200'
-                  : 'bg-white text-golf-green-900 border-golf-green-900 hover:bg-golf-green-50 hover:border-golf-green-700 shadow-md hover:shadow-lg'
+                  ? 'shadow-lg ring-2'
+                  : 'bg-white shadow-md hover:shadow-lg'
               }`}
+              style={{
+                backgroundColor: selectedCategory === 'all' ? '#C9A646' : '#ffffff',
+                color: selectedCategory === 'all' ? '#004225' : '#004225',
+                borderColor: selectedCategory === 'all' ? '#C9A646' : '#004225',
+                ringColor: selectedCategory === 'all' ? 'rgba(201, 166, 70, 0.3)' : 'transparent'
+              }}
             >
               All Products
-              <span className={`ml-2 px-2 py-0.5 rounded-full text-xs font-medium ${
-                selectedCategory === 'all'
-                  ? 'bg-golf-green-900/20 text-golf-green-900'
-                  : 'bg-golf-green-900/10 text-golf-green-900'
-              }`}>
+              <span className="ml-2 px-2 py-0.5 rounded-full text-xs font-medium"
+                    style={{
+                      backgroundColor: selectedCategory === 'all' ? 'rgba(0, 66, 37, 0.2)' : 'rgba(0, 66, 37, 0.1)',
+                      color: '#004225'
+                    }}>
                 {products.length}
               </span>
             </motion.button>
@@ -178,17 +207,23 @@ export default function ProductsPage() {
                     whileTap={{ scale: 0.95 }}
                     className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold text-xs sm:text-sm transition-all duration-300 border-2 relative ${
                     selectedCategory === category
-                        ? 'bg-golf-gold-500 text-golf-green-900 border-golf-gold-500 shadow-lg ring-2 ring-golf-gold-200'
-                        : 'bg-white text-golf-green-900 border-golf-green-900 hover:bg-golf-green-50 hover:border-golf-green-700 shadow-md hover:shadow-lg'
+                        ? 'shadow-lg ring-2'
+                        : 'bg-white shadow-md hover:shadow-lg'
                   }`}
+                    style={{
+                      backgroundColor: selectedCategory === category ? '#C9A646' : '#ffffff',
+                      color: selectedCategory === category ? '#004225' : '#004225',
+                      borderColor: selectedCategory === category ? '#C9A646' : '#004225',
+                      ringColor: selectedCategory === category ? 'rgba(201, 166, 70, 0.3)' : 'transparent'
+                    }}
                 >
                   {getCategoryDisplayName(category)}
                     {productCount > 0 && (
-                      <span className={`ml-2 px-2 py-0.5 rounded-full text-xs font-medium ${
-                        selectedCategory === category
-                          ? 'bg-golf-green-900/20 text-golf-green-900'
-                          : 'bg-golf-green-900/10 text-golf-green-900'
-                      }`}>
+                      <span className="ml-2 px-2 py-0.5 rounded-full text-xs font-medium"
+                            style={{
+                              backgroundColor: selectedCategory === category ? 'rgba(0, 66, 37, 0.2)' : 'rgba(0, 66, 37, 0.1)',
+                              color: '#004225'
+                            }}>
                         {productCount}
                       </span>
                     )}
@@ -199,6 +234,61 @@ export default function ProductsPage() {
           </div>
         </div>
       </section>
+
+      {/* Professional Minimal Sticky Bar - Only Categories */}
+      <AnimatePresence>
+        {showStickyBar && (
+          <motion.div
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -50 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className="fixed top-20 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100/50 shadow-sm"
+          >
+            <div className="max-w-7xl mx-auto px-4 py-3">
+              <div className="flex flex-wrap justify-center gap-2">
+                <motion.button
+                  onClick={() => setSelectedCategory('all')}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className={`px-3 py-1.5 rounded-full font-medium text-xs transition-all duration-200 border ${
+                    selectedCategory === 'all'
+                      ? 'shadow-sm'
+                      : 'hover:shadow-sm'
+                  }`}
+                  style={{
+                    backgroundColor: selectedCategory === 'all' ? '#C9A646' : 'rgba(255, 255, 255, 0.8)',
+                    color: selectedCategory === 'all' ? '#004225' : '#004225',
+                    borderColor: selectedCategory === 'all' ? '#C9A646' : 'rgba(0, 66, 37, 0.2)'
+                  }}
+                >
+                  All
+                </motion.button>
+                {availableCategories.slice(0, 6).map((category) => (
+                  <motion.button
+                    key={category}
+                    onClick={() => setSelectedCategory(category)}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className={`px-3 py-1.5 rounded-full font-medium text-xs transition-all duration-200 border ${
+                      selectedCategory === category
+                        ? 'shadow-sm'
+                        : 'hover:shadow-sm'
+                    }`}
+                    style={{
+                      backgroundColor: selectedCategory === category ? '#C9A646' : 'rgba(255, 255, 255, 0.8)',
+                      color: selectedCategory === category ? '#004225' : '#004225',
+                      borderColor: selectedCategory === category ? '#C9A646' : 'rgba(0, 66, 37, 0.2)'
+                    }}
+                  >
+                    {getCategoryDisplayName(category)}
+                  </motion.button>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Products by Category */}
       <section className="py-12 bg-gray-50">
@@ -221,18 +311,18 @@ export default function ProductsPage() {
                     {/* Titleist-Style Category Header */}
                     <div className="text-center mb-12">
                       <div className="inline-block">
-                        <h2 className="font-serif text-4xl md:text-5xl font-bold text-golf-green-900 mb-4 relative">
+                        <h2 className="font-serif text-4xl md:text-5xl font-bold mb-4 relative" style={{ color: '#004225' }}>
                           {getCategoryDisplayName(category)}
-                          <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-golf-gold-500 rounded-full"></div>
+                          <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 rounded-full" style={{ backgroundColor: '#C9A646' }}></div>
                         </h2>
                       </div>
-                      <p className="text-gray-600 text-xl font-light mt-6 max-w-2xl mx-auto">
+                      <p className="text-xl font-light mt-6 max-w-2xl mx-auto" style={{ color: '#374151' }}>
                         Precision-engineered {getCategoryDisplayName(category).toLowerCase()} designed for peak performance and uncompromising quality
                       </p>
                     </div>
 
-                    {/* Mobile-First Products Grid */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-12">
+                    {/* Mobile-Optimized Products Grid - 3 cards on mobile */}
+                    <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 lg:gap-8">
                       {categoryProducts.map((product, index) => (
                   <Link href={`/product/${product.id}`} key={product.id}>
                     <motion.div
@@ -249,11 +339,11 @@ export default function ProductsPage() {
                       }}
                       className="group relative cursor-pointer"
                     >
-                      {/* Apple/Rolex Style Card - Clean, Minimal, Premium */}
-                      <div className="relative bg-white rounded-xl overflow-hidden shadow-sm group-hover:shadow-lg transition-all duration-300 border border-gray-100/50">
+                      {/* Premium Card - Apple/Rolex Level Design */}
+                      <div className="relative bg-white rounded-2xl overflow-hidden shadow-lg group-hover:shadow-2xl transition-all duration-500 border border-gray-100/30 group-hover:border-golf-gold-200/50">
                         
-                        {/* Clean Image Section - No white enclosure */}
-                        <div className="relative aspect-square overflow-hidden bg-gray-50">
+                        {/* Premium Image Section with Brand Tag */}
+                        <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
                           {product.imageUrls && product.imageUrls.length > 0 && product.imageUrls[0] ? (
                             <motion.img
                               src={product.imageUrls[0]}
@@ -265,7 +355,7 @@ export default function ProductsPage() {
                               }}
                             />
                           ) : (
-                            <div className="w-full h-full flex items-center justify-center bg-gray-50">
+                            <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100">
                               <div className="text-center text-gray-300">
                                 <svg className="w-16 h-16 mx-auto mb-2" fill="currentColor" viewBox="0 0 24 24">
                                   <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
@@ -274,13 +364,28 @@ export default function ProductsPage() {
                               </div>
                             </div>
                           )}
+
+                          {/* Brand Tag - Bottom Left Corner */}
+                          {product.brand && (
+                            <motion.div
+                              className="absolute bottom-3 left-3"
+                              initial={{ scale: 0, opacity: 0 }}
+                              animate={{ scale: 1, opacity: 1 }}
+                              transition={{ delay: 0.4 + index * 0.1 }}
+                            >
+                              <div className="px-2 py-1 rounded-md bg-black/70 backdrop-blur-sm text-white text-xs font-medium shadow-lg">
+                                {product.brand}
+                              </div>
+                            </motion.div>
+                          )}
                         </div>
 
-                        {/* Clean Product Info - Minimal Spacing */}
-                        <div className="p-5">
-                          {/* Product Title - Italic like featured cards */}
+                        {/* Premium Product Info - Max 4 Elements */}
+                        <div className="p-5 space-y-3">
+                          {/* Product Title - Serif Font */}
                           <motion.h3
-                            className="font-medium italic text-lg text-gray-900 mb-2 leading-tight line-clamp-2"
+                            className="font-serif font-medium text-lg leading-tight line-clamp-2"
+                            style={{ color: '#111827' }}
                             initial={{ opacity: 0 }}
                             whileInView={{ opacity: 1 }}
                             transition={{ delay: 0.2 + index * 0.1 }}
@@ -288,9 +393,25 @@ export default function ProductsPage() {
                             {product.name}
                           </motion.h3>
 
-                          {/* Meta chips - Only shoes get size chip */}
-                          <div className="mb-3 flex flex-wrap gap-2">
-                            {((product.category || '').toLowerCase() === 'shoes' || /shoe/i.test(product.name)) && (
+                          {/* Wholesale Price Chip - Only for non-shoes */}
+                          {((product.category || '').toLowerCase() !== 'shoes' && !/shoe/i.test(product.name)) && (
+                            <motion.div
+                              initial={{ opacity: 0, scale: 0.9 }}
+                              whileInView={{ opacity: 1, scale: 1 }}
+                              transition={{ delay: 0.3 + index * 0.1 }}
+                            >
+                              <span className="inline-block px-3 py-1 text-xs rounded-full bg-green-100/80 backdrop-blur-sm border border-green-200/50" style={{ color: '#004225' }}>
+                                Wholesale Price
+                              </span>
+                            </motion.div>
+                          )}
+
+                          {/* Meta chips - Only shoes get size chip, only headwear gets gender */}
+                          <div className="flex flex-wrap gap-2">
+                            {product.gender && product.gender !== 'Unisex' && (product.category || '').toLowerCase() === 'headwear' && (
+                              <span className="px-2 py-1 text-xs rounded-md border border-gray-200 bg-gray-50" style={{ color: '#4b5563' }}>{product.gender}</span>
+                            )}
+                            {((product.category || '').toLowerCase() === 'shoes' && !/bag/i.test(product.name)) && (
                               <span className="px-2 py-1 text-xs rounded-md border border-amber-200 text-amber-700 bg-amber-50">Available in different Sizes</span>
                             )}
                           </div>
@@ -299,15 +420,18 @@ export default function ProductsPage() {
                           <motion.div
                             initial={{ opacity: 0 }}
                             whileInView={{ opacity: 1 }}
-                            transition={{ delay: 0.3 + index * 0.1 }}
-                            className="text-xl font-semibold text-gray-900"
+                            transition={{ delay: 0.4 + index * 0.1 }}
+                            className="text-xl font-semibold"
+                            style={{ color: '#111827' }}
                           >
                             {formatPrice(product.price)}
                           </motion.div>
                         </div>
 
-                        {/* Subtle hover effect */}
+                        {/* Premium hover effects */}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                        <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" 
+                             style={{ boxShadow: '0 0 30px rgba(201, 166, 70, 0.3)' }}></div>
                       </div>
                     </motion.div>
                   </Link>
@@ -369,8 +493,8 @@ export default function ProductsPage() {
                       </p>
               </div>
 
-                    {/* Mobile-First Products Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+                    {/* Mobile-Optimized Products Grid - 3 cards on mobile */}
+              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4 md:gap-6">
                       {categoryProducts.map((product, index) => (
                   <Link href={`/product/${product.id}`} key={product.id}>
                     <motion.div
@@ -387,11 +511,11 @@ export default function ProductsPage() {
                       }}
                       className="group relative cursor-pointer"
                     >
-                      {/* Apple/Rolex Style Card - Clean, Minimal, Premium */}
-                      <div className="relative bg-white rounded-xl overflow-hidden shadow-sm group-hover:shadow-lg transition-all duration-300 border border-gray-100/50">
+                      {/* Premium Card - Apple/Rolex Level Design */}
+                      <div className="relative bg-white rounded-2xl overflow-hidden shadow-lg group-hover:shadow-2xl transition-all duration-500 border border-gray-100/30 group-hover:border-golf-gold-200/50">
                         
-                        {/* Clean Image Section - No white enclosure */}
-                        <div className="relative aspect-square overflow-hidden bg-gray-50">
+                        {/* Premium Image Section with Brand Tag */}
+                        <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
                           {product.imageUrls && product.imageUrls.length > 0 && product.imageUrls[0] ? (
                             <motion.img
                             src={product.imageUrls[0]}
@@ -403,22 +527,37 @@ export default function ProductsPage() {
                             }}
                           />
                           ) : (
-                            <div className="w-full h-full flex items-center justify-center bg-gray-50">
+                            <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100">
                               <div className="text-center text-gray-300">
                                 <svg className="w-16 h-16 mx-auto mb-2" fill="currentColor" viewBox="0 0 24 24">
                                   <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
                                 </svg>
                                 <p className="text-sm font-medium">Premium Equipment</p>
-                              </div>
-                            </div>
-                          )}
                         </div>
+                          </div>
+                        )}
 
-                        {/* Clean Product Info - Minimal Spacing */}
-                        <div className="p-5">
-                          {/* Product Title - Italic like featured cards */}
+                          {/* Brand Tag - Bottom Left Corner */}
+                          {product.brand && (
+                            <motion.div
+                              className="absolute bottom-3 left-3"
+                              initial={{ scale: 0, opacity: 0 }}
+                              animate={{ scale: 1, opacity: 1 }}
+                              transition={{ delay: 0.4 + index * 0.1 }}
+                            >
+                              <div className="px-2 py-1 rounded-md bg-black/70 backdrop-blur-sm text-white text-xs font-medium shadow-lg">
+                                {product.brand}
+                              </div>
+                            </motion.div>
+                          )}
+                      </div>
+
+                        {/* Premium Product Info - Max 4 Elements */}
+                        <div className="p-5 space-y-3">
+                          {/* Product Title - Serif Font */}
                           <motion.h3
-                            className="font-medium italic text-lg text-gray-900 mb-2 leading-tight line-clamp-2"
+                            className="font-serif font-medium text-lg leading-tight line-clamp-2"
+                            style={{ color: '#111827' }}
                             initial={{ opacity: 0 }}
                             whileInView={{ opacity: 1 }}
                             transition={{ delay: 0.2 + index * 0.1 }}
@@ -426,9 +565,25 @@ export default function ProductsPage() {
                             {product.name}
                           </motion.h3>
 
-                          {/* Meta chips - Only shoes get size chip */}
-                          <div className="mb-3 flex flex-wrap gap-2">
-                            {((product.category || '').toLowerCase() === 'shoes' || /shoe/i.test(product.name)) && (
+                          {/* Wholesale Price Chip - Only for non-shoes */}
+                          {((product.category || '').toLowerCase() !== 'shoes' && !/shoe/i.test(product.name)) && (
+                            <motion.div
+                              initial={{ opacity: 0, scale: 0.9 }}
+                              whileInView={{ opacity: 1, scale: 1 }}
+                              transition={{ delay: 0.3 + index * 0.1 }}
+                            >
+                              <span className="inline-block px-3 py-1 text-xs rounded-full bg-green-100/80 backdrop-blur-sm border border-green-200/50" style={{ color: '#004225' }}>
+                                Wholesale Price
+                            </span>
+                            </motion.div>
+                          )}
+
+                          {/* Meta chips - Only shoes get size chip, only headwear gets gender */}
+                          <div className="flex flex-wrap gap-2">
+                            {product.gender && product.gender !== 'Unisex' && (product.category || '').toLowerCase() === 'headwear' && (
+                              <span className="px-2 py-1 text-xs rounded-md border border-gray-200 bg-gray-50" style={{ color: '#4b5563' }}>{product.gender}</span>
+                            )}
+                            {((product.category || '').toLowerCase() === 'shoes' && !/bag/i.test(product.name)) && (
                               <span className="px-2 py-1 text-xs rounded-md border border-amber-200 text-amber-700 bg-amber-50">Available in different Sizes</span>
                             )}
                           </div>
@@ -437,15 +592,18 @@ export default function ProductsPage() {
                           <motion.div
                             initial={{ opacity: 0 }}
                             whileInView={{ opacity: 1 }}
-                            transition={{ delay: 0.3 + index * 0.1 }}
-                            className="text-xl font-semibold text-gray-900"
+                            transition={{ delay: 0.4 + index * 0.1 }}
+                            className="text-xl font-semibold"
+                            style={{ color: '#111827' }}
                           >
                             {formatPrice(product.price)}
                           </motion.div>
                         </div>
 
-                        {/* Subtle hover effect */}
+                        {/* Premium hover effects */}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                        <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" 
+                             style={{ boxShadow: '0 0 30px rgba(201, 166, 70, 0.3)' }}></div>
                       </div>
                     </motion.div>
                   </Link>
@@ -458,6 +616,9 @@ export default function ProductsPage() {
           )}
         </div>
       </section>
+      
+      {/* Back to Top Button */}
+      <BackToTop />
     </main>
   );
 }

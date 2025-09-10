@@ -38,7 +38,7 @@ export default function HeroSection() {
           className="mb-6 sm:mb-8"
         >
           <h1 className="font-serif text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6 leading-tight tracking-tight">
-          Elevate Your Game
+            Elevate Your Game
           </h1>
           <h2 className="text-golf-gold-400 text-lg sm:text-xl md:text-2xl font-medium tracking-wide mb-6 sm:mb-8 md:mb-10">
             Premium Gear. Timeless Style.
@@ -51,13 +51,13 @@ export default function HeroSection() {
           transition={{ duration: 1, delay: 0.6 }}
         >
           <Link href="/products">
-            <motion.button
+          <motion.button
               whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
+            whileTap={{ scale: 0.95 }}
               className="btn-premium text-base sm:text-lg md:text-xl px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 min-w-[180px] sm:min-w-[200px] md:min-w-[220px] shadow-2xl font-semibold tracking-wide"
-            >
-              Shop Now
-            </motion.button>
+          >
+            Shop Now
+          </motion.button>
           </Link>
         </motion.div>
       </div>

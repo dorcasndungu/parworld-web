@@ -5,10 +5,12 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageCircle, Menu, X } from 'lucide-react';
+import { useDeviceOptimization } from '@/hooks/useDeviceOptimization';
 
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { deviceInfo, getOptimalColor, getTextClasses } = useDeviceOptimization();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -73,7 +75,7 @@ export default function Navigation() {
                 }`}
               >
                 <span className="relative z-10 group-hover:text-golf-gold-400 transition-colors duration-300">
-                  {item.name}
+                {item.name}
                 </span>
                 <div className="absolute inset-0 bg-golf-gold-400/10 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-300 -z-0"></div>
                 <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-golf-gold-400 group-hover:w-full transition-all duration-300"></div>
@@ -121,7 +123,8 @@ export default function Navigation() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="block text-golf-green-900 font-medium hover:text-golf-gold-500 transition-colors text-base sm:text-lg py-2"
+                  className={`block font-semibold hover:text-golf-gold-500 transition-colors text-base sm:text-lg py-2 ${getTextClasses()}`}
+                  style={{ color: getOptimalColor('#004225') }}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {item.name}

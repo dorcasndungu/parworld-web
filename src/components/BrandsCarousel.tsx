@@ -25,10 +25,10 @@ export default function BrandsCarousel() {
           transition={{ duration: 0.8 }}
           className="text-center"
         >
-          <h3 className="font-serif text-3xl font-bold text-golf-green-900 mb-4">
-            Premium <span className="text-golf-gold-500">Brands</span>
+          <h3 className="font-serif text-3xl font-bold mb-4" style={{ color: '#004225' }}>
+            Premium <span style={{ color: '#C9A646' }}>Brands</span>
           </h3>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <p className="max-w-2xl mx-auto" style={{ color: '#374151' }}>
             Featuring equipment from the world's most prestigious golf brands -
             the same gear trusted by professionals and champions worldwide.
           </p>
